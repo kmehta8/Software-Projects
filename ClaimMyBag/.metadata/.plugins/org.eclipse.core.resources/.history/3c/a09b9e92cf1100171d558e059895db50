@@ -1,0 +1,14 @@
+package cas2xb3_finalprototype;
+
+import edu.princeton.cs.algs4.SeparateChainingHashST;
+
+public class Trial {
+	private static SeparateChainingHashST<Integer, String> hashmap;
+	public static void main(String[] args){
+		hashmap.put(0, "diya");
+		hashmap.put(1, "shalmi");
+		hashmap.put(2, "rhea");
+		hashmap.put(1, "appu");
+		System.out.println(hashmap.keys());
+	}
+}

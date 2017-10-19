@@ -1,0 +1,8 @@
+package cas2xb3_finalprototype;
+
+public class testing {
+	publc int add(int u){
+		u=u +1;
+		return u.
+	}
+}

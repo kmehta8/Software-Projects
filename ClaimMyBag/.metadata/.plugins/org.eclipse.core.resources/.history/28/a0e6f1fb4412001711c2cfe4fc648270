@@ -1,0 +1,55 @@
+package cas2xb3_finalprototype;
+
+
+import java.util.Iterator;
+
+import edu.princeton.cs.algs4.*;
+
+
+public class Graph {
+	private final int V;
+	private int E = 0;
+	private Bag<Edge>[] adj;
+	
+	public Graph(int V){
+		this.V = V;
+		adj = (Bag<Edge>[]) new Bag[V];
+		for (int v = 0; v < V; v ++)
+			adj[v] = new Bag<Edge>();
+	}
+	
+	
+	public int V() {
+		return V;
+	}
+	
+	public int E() {
+		return E;
+	}
+	
+	public void addEdge(int v, int w){
+		
+	}
+	
+	/**
+	 * This checks to see if there is an edge that exists inside of the 
+	 * @param v This is the edge to check if it is contained inside of the 
+	 * adjacency list. 
+	 * @return Returns a boolean depending on whether or not there is 
+	 * an edge that exists within the adjacency list. 
+	 */
+	public boolean contains(Edge v){
+		Iterator<Edge> swagger = adj[v.airlineVertex().getID()].iterator();
+		while (swagger.hasNext()){
+			if (swagger.next() == v){
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	public Iterable<Edge> adj (int v){
+		return adj[v];
+	}
+}

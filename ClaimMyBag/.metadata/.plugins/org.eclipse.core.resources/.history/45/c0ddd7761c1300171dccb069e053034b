@@ -1,0 +1,70 @@
+package cas2xb3_finalprototype;
+
+public class LinearProbingHashST<Integer, Edge>{
+	private int n;
+	private int m = 0;
+	private Integer[] ID;
+	private Edge[] edges;
+	
+	/**
+	 * This is the constructor for a new linear probing hash table, which
+	 * has a parameter indicating the size of the two arrays for ID and 
+	 * edges.
+	 * @param m This is the size of the array.
+	 */
+	public LinearProbingHashST(int m) {
+		this.m = m;
+		ID = (Integer[]) new Object[this.m];
+		edges = (Edge[]) new Object[this.m];
+	}
+	
+	/**
+	 * This finds a corresponding hash code to a vertex ID, which can then be used
+	 * to place both the ID and the edge into the hash table.
+	 * @param integer This is the ID code for the vertex.
+	 * @return This returns the hash code used to determine which index to place inside 
+	 * of the hash table.
+	 */
+	private int hash(Integer integer){
+		return (integer.hashCode() & 0x7fffffff) % m;
+	}
+	
+	/**
+	 * This resizes the hash table if need be.
+	 * @param cap This sets the size of the new hash table.
+	 */
+	private void resize(int cap){
+		LinearProbingHashST<Integer, Edge> t;
+		t = new LinearProbingHashST<Integer, Edge>(cap);
+		for (int i = 0; i < m; i ++)
+			if (ID[i] != null)
+				t.put(ID[i], edges[i]);
+		ID = t.ID;
+		edges = t.edges;
+		m = t.m;
+	}
+	
+	/**
+	 * The purpose of this is to either update a value of weight or place
+	 * a new edge inside of a hash table.
+	 * @param integer This is the ID of the vertex that determines which place to put
+	 * the edge inside the hash table.
+	 * @param addedEdge This is the edge that is placed inside of the edges array.
+	 * This serves the purpose of "value" inside Algorithms 4th Edition by Sedgewick.
+	 */
+	public void put(Integer integer, Edge addedEdge){
+		if (n >= m/2) resize(2 * m);
+		
+		int i;
+		for (i = hash(integer); ID[i] != null; i = (i + 1) % m)
+			if (ID[i].equals(integer)) {
+				Edge newEdge = (Edge) edges[i];
+				newEdge.increaseWeight();
+				edges[i] = newEdge;
+			}
+		
+		ID[i] = integer;
+		edges[i] = addedEdge;
+		n ++;
+	}
+}
